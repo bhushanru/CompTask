@@ -21,7 +21,7 @@ namespace CompTask
 
             //steps to login
             Login obj1 = new Login();
-            obj1.LoginSteps(CommonDriver.driver);
+            obj1.LoginSteps();
 
             //steps to Add a share skill
             ShareSkill obj2 = new ShareSkill();

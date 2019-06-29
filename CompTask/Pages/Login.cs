@@ -7,40 +7,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Support.PageObjects;
+using CompTask.Helpers;
 
 namespace CompTask.Pages
 {
     class Login
     {
-     public void LoginSteps(IWebDriver driver)
+        //Constructor
+        public Login()
+        {
+            PageFactory.InitElements(CommonDriver.driver, this);
+        }
+
+        //Define IWebElements
+        //username
+        [FindsBy(How = How.XPath,Using = "(//INPUT[@type='text'])[2]")]
+        private IWebElement username { get; set; }
+
+        //password
+        [FindsBy(How = How.XPath,Using = "//INPUT[@type='password']")]
+        private IWebElement password { get; set; }
+
+        //Login Button
+        [FindsBy(How = How.XPath,Using = "//BUTTON[@class='fluid ui teal button'][text()='Login']")]
+        private IWebElement LoginBtn { get; set; }
+
+     public void LoginSteps()
         {
             //Maximise Browser
-            driver.Manage().Window.Maximize();
+            CommonDriver.driver.Manage().Window.Maximize();
 
             //Navigate to the url
-            driver.Navigate().GoToUrl("http://www.skillswap.pro/");
+            CommonDriver.driver.Navigate().GoToUrl("http://www.skillswap.pro/");
             Thread.Sleep(10000);
 
             //Click SignIn button
-            driver.FindElement(By.PartialLinkText("Sign In")).Click();
-
-            //Identify username textbox
-            IWebElement username = driver.FindElement(By.XPath("(//INPUT[@type='text'])[2]"));
-
-            //Enter valid username
+            CommonDriver.driver.FindElement(By.PartialLinkText("Sign In")).Click();
+             
+            //Input for username
             username.SendKeys("bhushanru@gmail.com");
 
-            //Identify password textbox
-            IWebElement password = driver.FindElement(By.XPath("//INPUT[@type='password']"));
-
-            //Enter password
+            //Identify password
             password.SendKeys("bhubhu");
 
             //Click on login button
-            driver.FindElement(By.XPath("//BUTTON[@class='fluid ui teal button'][text()='Login']")).Click();
+            LoginBtn.Click();
 
             //Wait for login screen
             Thread.Sleep(3000);
+
+
         }
     }
 }
