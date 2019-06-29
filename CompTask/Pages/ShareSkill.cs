@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -8,42 +7,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CompTask
+namespace CompTask.Pages
 {
-    class Program
+    class ShareSkill
     {
-        static void Main(string[] args)
+        public void AddShareSkill(IWebDriver driver)
         {
-            IWebDriver driver = new ChromeDriver();
-
-            //Maximise Browser
-            driver.Manage().Window.Maximize();
-
-            //Navigate to the url
-            driver.Navigate().GoToUrl("http://www.skillswap.pro/");
-            Thread.Sleep(10000);
-
-            //Click SignIn button
-            driver.FindElement(By.PartialLinkText("Sign In")).Click();
-
-            //Identify username textbox
-            IWebElement username = driver.FindElement(By.XPath("(//INPUT[@type='text'])[2]"));
-
-            //Enter valid username
-            username.SendKeys("bhushanru@gmail.com");
-
-            //Identify password textbox
-            IWebElement password = driver.FindElement(By.XPath("//INPUT[@type='password']"));
-
-            //Enter password
-            password.SendKeys("bhubhu");
-
-            //Click on login button
-            driver.FindElement(By.XPath("//BUTTON[@class='fluid ui teal button'][text()='Login']")).Click();
-
-            //Wait for login screen
-            Thread.Sleep(7000);
-
             //Click Share Skill button
             driver.FindElement(By.XPath("//a[@class='ui basic green button']")).Click();
             Thread.Sleep(5000);
@@ -143,7 +112,7 @@ namespace CompTask
             //Click Save
             IWebElement save = driver.FindElement(By.XPath("//input[@class='ui teal button']"));
             save.Click();
-                                                  
+
         }
     }
 }
