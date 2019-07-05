@@ -24,14 +24,15 @@ namespace CompTask
             obj1.LoginSteps();
 
             //steps to Add a share skill
-            ShareSkill obj2 = new ShareSkill();
-            obj2.AddShareSkill(CommonDriver.driver);
+            //ShareSkill obj2 = new ShareSkill();
+            //obj2.AddShareSkill(CommonDriver.driver);
 
             //Edit listing
             ManageListing obj3 = new ManageListing();
             obj3.EditListing(CommonDriver.driver);
 
             //Delete a listing
+            obj3.DeleteListing(CommonDriver.driver);
             obj3.DeleteListing(CommonDriver.driver);
 
             //Close Browser
