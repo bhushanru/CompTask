@@ -1,6 +1,7 @@
 ﻿
 using CompTask.Helpers;
 using CompTask.Pages;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -13,30 +14,57 @@ using System.Threading.Tasks;
 
 namespace CompTask
 {
+    [TestFixture]
     class Program
     {
-        static void Main(string[] args)
+        [SetUp]
+        public void Login()
         {
-            CommonDriver.driver = new ChromeDriver();
+            CommonDriver.Driver = new ChromeDriver();
 
             //steps to login
             Login obj1 = new Login();
             obj1.LoginSteps();
 
-            //steps to Add a share skill
-            //ShareSkill obj2 = new ShareSkill();
-            //obj2.AddShareSkill(CommonDriver.driver);
+        }
 
+        [Test]
+        public void AddSkill()
+        {
+            //steps to Add a share skill
+            ShareSkill obj2 = new ShareSkill();
+            obj2.AddShareSkill(CommonDriver.Driver);
+
+        }
+
+        [Test]
+        public void EditSkill()
+        {
             //Edit listing
             ManageListing obj3 = new ManageListing();
-            obj3.EditListing(CommonDriver.driver);
+            obj3.EditListing(CommonDriver.Driver);
 
+        }
+
+        [Test]
+        public void DelSkill()
+        {
             //Delete a listing
-            obj3.DeleteListing(CommonDriver.driver);
-            obj3.DeleteListing(CommonDriver.driver);
+            ManageListing obj3 = new ManageListing();
+            obj3.DeleteListing(CommonDriver.Driver);
+ 
+        }
+
+        [TearDown]
+        public void FlushTest()
+        {
 
             //Close Browser
-            CommonDriver.driver.Close();
+            CommonDriver.Driver.Close();
+        }
+
+        static void Main(string[] args)
+        {
 
         }
 

@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenQA.Selenium.Support.PageObjects;
+
 using CompTask.Helpers;
+using SeleniumExtras.PageObjects;
 
 namespace CompTask.Pages
 {
@@ -17,17 +18,17 @@ namespace CompTask.Pages
         //Constructor
         public Login()
         {
-            PageFactory.InitElements(CommonDriver.driver, this);
+            PageFactory.InitElements(CommonDriver.Driver, this);
         }
 
         //Define IWebElements
         //username
         [FindsBy(How = How.XPath,Using = "(//INPUT[@type='text'])[2]")]
-        private IWebElement username { get; set; }
+        private IWebElement Username { get; set; }
 
         //password
         [FindsBy(How = How.XPath,Using = "//INPUT[@type='password']")]
-        private IWebElement password { get; set; }
+        private IWebElement Password { get; set; }
 
         //Login Button
         [FindsBy(How = How.XPath,Using = "//BUTTON[@class='fluid ui teal button'][text()='Login']")]
@@ -36,20 +37,20 @@ namespace CompTask.Pages
      public void LoginSteps()
         {
             //Maximise Browser
-            CommonDriver.driver.Manage().Window.Maximize();
+            CommonDriver.Driver.Manage().Window.Maximize();
 
             //Navigate to the url
-            CommonDriver.driver.Navigate().GoToUrl("http://www.skillswap.pro/");
+            CommonDriver.Driver.Navigate().GoToUrl("http://www.skillswap.pro/");
             Thread.Sleep(10000);
 
             //Click SignIn button
-            CommonDriver.driver.FindElement(By.PartialLinkText("Sign In")).Click();
+            CommonDriver.Driver.FindElement(By.PartialLinkText("Sign In")).Click();
              
             //Input for username
-            username.SendKeys("bhushanru@gmail.com");
+            Username.SendKeys("bhushanru@gmail.com");
 
             //Identify password
-            password.SendKeys("bhubhu");
+            Password.SendKeys("bhubhu");
 
             //Click on login button
             LoginBtn.Click();

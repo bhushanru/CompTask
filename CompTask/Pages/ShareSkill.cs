@@ -1,7 +1,8 @@
 ﻿using CompTask.Helpers;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace CompTask.Pages
     {
         public ShareSkill()
         {
-            PageFactory.InitElements(CommonDriver.driver, this);
+            PageFactory.InitElements(CommonDriver.Driver, this);
         }
 
         //Define IwebELements
@@ -132,17 +133,18 @@ namespace CompTask.Pages
         private IWebElement Savebtn { get; set; }
 
 
-        public void AddShareSkill(IWebDriver driver)
+
+        public void AddShareSkill(IWebDriver Driver)
         {
             //Click Share Skill button
             ShareSkillBtn.Click();
             Thread.Sleep(5000);
             
             //Title Input
-            Title.SendKeys("Software Tester");
+            Title.SendKeys("Software Tester 7");
 
             //Description Input
-            Description.SendKeys("I am an experiende software tester in both Manual and Automation");
+            Description.SendKeys("I am an experienced software tester in both Manual and Automation");
 
             //Select Category
             var selectElement1 = new SelectElement(Category);
@@ -209,7 +211,22 @@ namespace CompTask.Pages
 
             //Click Save
             Savebtn.Click();
+            Thread.Sleep(3000);
 
+            //Verification
+            
+            //CommonDriver.Driver.FindElement(By.XPath("//a[contains(text(),'Manage Listings')]")).Click();
+            //string ExpectedResult1 = "Software Tester 7";
+            //string ActualResult1 = CommonDriver.Driver.FindElement(By.XPath("//td[contains(text(),'q')]")).Text;
+
+            //if (ActualResult1 == ExpectedResult1)
+            //{
+            //    Console.WriteLine("Test Pass: Skill Added");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Test Fail: Skill Not Added");
+            //}
         }
     }
 }
