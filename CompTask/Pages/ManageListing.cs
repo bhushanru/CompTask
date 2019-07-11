@@ -1,4 +1,5 @@
 ﻿using CompTask.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
@@ -17,7 +18,7 @@ namespace CompTask.Pages
         {
             PageFactory.InitElements(CommonDriver.Driver, this);
         }
-                       
+
         //Defining IWebElements
         //ManageListing Menu
         [FindsBy(How = How.CssSelector, Using = "div:nth-child(1) div:nth-child(1) section.nav-secondary:nth-child(2) div.ui.eight.item.menu > a.item:nth-child(3)")]
@@ -43,6 +44,10 @@ namespace CompTask.Pages
         [FindsBy(How = How.XPath, Using = "//button[@class='ui icon positive right labeled button']")]
         private IWebElement DelYes { get; set; }
 
+        //ManageListingTitle
+        [FindsBy(How = How.XPath, Using = "//td[contains(text(),'Software Tester 7')]")]
+        private IWebElement ManageListTitle { get; set; }
+
         //ActualResult3
         [FindsBy(How = How.XPath, Using = "//div[@class='ns-box-inner']")]
         private IWebElement ActResult3 { get; set; }
@@ -52,11 +57,11 @@ namespace CompTask.Pages
 
             //Click Manage Listings Menu
             ManageListingsMenu.Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(7000);
 
             //Click Edit Icon
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            js.ExecuteScript("arguments[0].click();", Element);
+            IJavaScriptExecutor js1 = (IJavaScriptExecutor)Driver;
+            js1.ExecuteScript("arguments[0].click();", Element);
             Thread.Sleep(5000);
 
             //Change Title
@@ -64,8 +69,10 @@ namespace CompTask.Pages
             Title.Clear();
             Title.SendKeys("Industry Connect Software Tester");
 
+
             //Click Savebutton
             SaveBtn.Click();
+            Thread.Sleep(5000);
 
             //Verification   
             var title2 = "Industry Connect Software Tester";
@@ -79,23 +86,47 @@ namespace CompTask.Pages
             {
                 Console.WriteLine("Test1 failed : Title not edited");
             }
+            //try
+            //{
+            //    Assert.AreEqual("Industry Connect Software Tester", ManageListTitle.Text);
+            //    Console.WriteLine("Test Pass: Skill listing edited");
+            //}
+            //catch (Exception e)
+            //{
+
+            //    Console.WriteLine("Test Fail: Skill listing NOT Edited");
+            //}
 
 
         }
 
+
+
+
         public void DeleteListing(IWebDriver Driver)
         {
             //Click Manage Listings Menu
-            
+
             ManageListingsMenu.Click();
             Thread.Sleep(5000);
 
-            //Click Delete Icon
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            js.ExecuteScript("arguments[0].click();", Delelement);
-            
-            //click "Yes" in delete pop up
-            DelYes.Click();
+            IJavaScriptExecutor js3 = (IJavaScriptExecutor)Driver;
+            js3.ExecuteScript("arguments[0].click();", ManageListTitle);
+
+            try
+            {
+                Assert.IsTrue(ManageListTitle.Displayed);
+                //Click Delete Icon
+                IJavaScriptExecutor js2 = (IJavaScriptExecutor)Driver;
+                js2.ExecuteScript("arguments[0].click();", Delelement);
+
+                //click "Yes" in delete pop up
+                DelYes.Click();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Title cannot be found");
+            }
 
             //Verfication
             string ExpResult3 = "Software Tester has been deleted";
@@ -105,12 +136,24 @@ namespace CompTask.Pages
             if (ExpResult3 == ActualResult3)
             {
                 Console.WriteLine("Test 3 Pass : Record deleted successully");
-               // Helpers.SaveScreenShotClass.SaveScreenshot(CommonDriver.Driver, "Delete Listing");
+                // Helpers.SaveScreenShotClass.SaveScreenshot(CommonDriver.Driver, "Delete Listing");
             }
             else
             {
                 Console.WriteLine("Test 3 Fail: Record not deleted");
             }
+            //        try
+            //        {
+
+            //            Assert.AreEqual("Software tester 7 has been deleted",ActResult3.Text);
+            //            Console.WriteLine("Test Fail: Skill listing still present");
+            //        }
+            //        catch(Exception e)
+            //        {
+            //            Console.WriteLine("Test Pass: Skill listing Deleted");
+            //        }
+            //    }
+            //}
         }
     }
 }

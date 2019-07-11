@@ -1,6 +1,7 @@
 ﻿using CompTask.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
-
+using AutoItX3Lib;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
@@ -124,16 +125,20 @@ namespace CompTask.Pages
         [FindsBy(How = How.CssSelector, Using = "div.ui.container:nth-child(3) div.listing form.ui.form div.tooltip-target.ui.grid:nth-child(8) div.twelve.wide.column:nth-child(4) div.field div.form-wrapper div.ReactTags__tags div.ReactTags__selected div.ReactTags__tagInput > input.ReactTags__tagInputField")]
         private IWebElement SkillExchange { get; set; }
 
+        //Click Upload Icon
+        [FindsBy(How = How.XPath, Using = "//I[@class='huge plus circle icon padding-25']")]
+        private IWebElement Upload { get; set; }
+
+
         //Selct Skill Active
         [FindsBy(How = How.Name, Using = "isActive")]
         private IWebElement SkillActive { get; set; }
-
+        
         //Select Save
         [FindsBy(How = How.XPath, Using = "//input[@class='ui teal button']")]
         private IWebElement Savebtn { get; set; }
 
-
-
+        
         public void AddShareSkill(IWebDriver Driver)
         {
             //Click Share Skill button
@@ -206,15 +211,26 @@ namespace CompTask.Pages
             SkillExchange.SendKeys("automation");
             SkillExchange.SendKeys(Keys.Enter);
 
+            //Upload Work Sample Upload click
+            IJavaScriptExecutor js1 = (IJavaScriptExecutor)Driver;
+            js1.ExecuteScript("arguments[0].click();", Upload);
+            Thread.Sleep(5000);
+
+            AutoItX3 autoIt = new AutoItX3();
+            autoIt.WinActivate("Open");
+            autoIt.Send(@"C:\Users\Bhushan\Desktop\Updated - Mars(QA)-CompetitionTask.pdf");
+            Thread.Sleep(4000);
+            autoIt.Send("{ENTER}");
+
             //Select Active
             SkillActive.Click();
 
             //Click Save
             Savebtn.Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             //Verification
-            
+
             //CommonDriver.Driver.FindElement(By.XPath("//a[contains(text(),'Manage Listings')]")).Click();
             //string ExpectedResult1 = "Software Tester 7";
             //string ActualResult1 = CommonDriver.Driver.FindElement(By.XPath("//td[contains(text(),'q')]")).Text;
@@ -227,6 +243,17 @@ namespace CompTask.Pages
             //{
             //    Console.WriteLine("Test Fail: Skill Not Added");
             //}
+
+            try
+            {
+
+                Assert.IsTrue(Driver.FindElement(By.XPath("//tr[1]//td[3]")).Displayed);
+                Console.WriteLine("Test Pass: Skill listing Added");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Test Fail: Skill listing not present");
+            }
         }
     }
 }
