@@ -146,10 +146,10 @@ namespace CompTask.Pages
             Thread.Sleep(5000);
             
             //Title Input
-            Title.SendKeys("Software Tester 7");
+            Title.SendKeys(Helpers.ExcelLib.ReadData(2, "Title"));
 
             //Description Input
-            Description.SendKeys("I am an experienced software tester in both Manual and Automation");
+            Description.SendKeys(Helpers.ExcelLib.ReadData(2, "Description"));
 
             //Select Category
             var selectElement1 = new SelectElement(Category);
@@ -163,7 +163,7 @@ namespace CompTask.Pages
             Console.WriteLine("Sub-Category selcted");
 
             //Select Tags
-            Tag1.SendKeys("testing");
+            Tag1.SendKeys(Helpers.ExcelLib.ReadData(2, "Tag1"));
             Tag1.SendKeys(Keys.Enter);
 
             Console.WriteLine("Enter clicked");
@@ -180,35 +180,34 @@ namespace CompTask.Pages
             //Input for the whole week
             //Monday time
             MonCheck.Click();
-            MonStart.SendKeys("0900AM");
-            MonEnd.SendKeys("0500PM");
+            MonStart.SendKeys(Helpers.ExcelLib.ReadData(2, "MonStart"));
+            MonEnd.SendKeys(Helpers.ExcelLib.ReadData(2, "MonEnd"));
 
             //Tuesday time
             TuesCheck.Click();
-            
-            TuesStart.SendKeys("0900AM");
-            TuesEnd.SendKeys("0500PM");
+            TuesStart.SendKeys(Helpers.ExcelLib.ReadData(2, "TuesStart"));
+            TuesEnd.SendKeys(Helpers.ExcelLib.ReadData(2, "TuesEnd"));
 
             //Wednesday time
             WedCheck.Click();            
-            WedStart.SendKeys("0900AM");
-            WedEnd.SendKeys("0500PM");
+            WedStart.SendKeys(Helpers.ExcelLib.ReadData(2, "WedStart"));
+            WedEnd.SendKeys(Helpers.ExcelLib.ReadData(2, "WedEnd"));
 
             //Thursday time
             ThursCheck.Click();
-            ThursStart.SendKeys("0900AM");
-            ThursEnd.SendKeys("0500PM");
+            ThursStart.SendKeys(Helpers.ExcelLib.ReadData(2, "ThursStart"));
+            ThursEnd.SendKeys(Helpers.ExcelLib.ReadData(2, "ThursEnd"));
 
             //Friday time
             FriCheck.Click();
-            FriStart.SendKeys("0900AM");
-            FriEnd.SendKeys("0500PM");
+            FriStart.SendKeys(Helpers.ExcelLib.ReadData(2, "FriStart"));
+            FriEnd.SendKeys(Helpers.ExcelLib.ReadData(2, "FriEnd"));
 
             //Select Skill trade
             SkillTrade.Click();
 
             //Select Skill Exchange
-            SkillExchange.SendKeys("automation");
+            SkillExchange.SendKeys(Helpers.ExcelLib.ReadData(2, "SkillExchange"));
             SkillExchange.SendKeys(Keys.Enter);
 
             //Upload Work Sample Upload click
@@ -252,7 +251,7 @@ namespace CompTask.Pages
             }
             catch (Exception e)
             {
-                Console.WriteLine("Test Fail: Skill listing not present");
+             Console.WriteLine(e);
             }
         }
     }

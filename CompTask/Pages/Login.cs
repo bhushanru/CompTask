@@ -40,17 +40,17 @@ namespace CompTask.Pages
             CommonDriver.Driver.Manage().Window.Maximize();
 
             //Navigate to the url
-            CommonDriver.Driver.Navigate().GoToUrl("http://www.skillswap.pro/");
+            CommonDriver.Driver.Navigate().GoToUrl(Helpers.ExcelLib.ReadData(2,"Url"));
             Thread.Sleep(10000);
 
             //Click SignIn button
             CommonDriver.Driver.FindElement(By.PartialLinkText("Sign In")).Click();
              
             //Input for username
-            Username.SendKeys("bhushanru@gmail.com");
+            Username.SendKeys(Helpers.ExcelLib.ReadData(2,"Username"));
 
             //Identify password
-            Password.SendKeys("bhubhu");
+            Password.SendKeys(Helpers.ExcelLib.ReadData(2, "Password"));
 
             //Click on login button
             LoginBtn.Click();

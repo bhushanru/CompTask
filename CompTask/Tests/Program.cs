@@ -21,7 +21,8 @@ namespace CompTask
         public void Login()
         {
             CommonDriver.Driver = new ChromeDriver();
-
+            //Populate Excel Sheet
+            Helpers.ExcelLib.PopulateInCollection(@"C:\Users\Bhushan\source\repos\CompTask\CompTask\ExcelData\TestData.xlsx.xlsx", "LoginTestData");
             //steps to login
             Login obj1 = new Login();
             obj1.LoginSteps();
@@ -31,6 +32,8 @@ namespace CompTask
         [Test]
         public void AddSkill()
         {
+            //Populate Excel Sheet
+            Helpers.ExcelLib.PopulateInCollection(@"C:\Users\Bhushan\source\repos\CompTask\CompTask\ExcelData\TestData.xlsx.xlsx", "ShareSkillTestData");
             //steps to Add a share skill
             ShareSkill obj2 = new ShareSkill();
             obj2.AddShareSkill(CommonDriver.Driver);
@@ -40,6 +43,9 @@ namespace CompTask
         [Test]
         public void EditSkill()
         {
+            //Populate Excel Sheet
+            Helpers.ExcelLib.PopulateInCollection(@"C:\Users\Bhushan\source\repos\CompTask\CompTask\ExcelData\TestData.xlsx.xlsx", "EditShareSkillTestData");
+
             //Edit listing
             ManageListing obj3 = new ManageListing();
             obj3.EditListing(CommonDriver.Driver);
@@ -49,6 +55,9 @@ namespace CompTask
         [Test]
         public void DelSkill()
         {
+            //Populate Excel Sheet
+            Helpers.ExcelLib.PopulateInCollection(@"C:\Users\Bhushan\source\repos\CompTask\CompTask\ExcelData\TestData.xlsx.xlsx", "ShareSkillTestData");
+
             //Delete a listing
             ManageListing obj3 = new ManageListing();
             obj3.DeleteListing(CommonDriver.Driver);
